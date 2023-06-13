@@ -2,11 +2,16 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    ListCreateAPIView, 
+    RetrieveUpdateDestroyAPIView,
+    ListAPIView
+)
 
 from .serializers import (
     DepartmentSerializer,
-    PersonnelSerializer
+    PersonnelSerializer,
+    DepartmentPersonnelSerializer
 )
 
 from .models import (
@@ -31,3 +36,7 @@ class PersonnelRUDView(RetrieveUpdateDestroyAPIView):
     queryset = Personnel.objects.all()
     serializer_class = PersonnelSerializer
 
+
+class DepartmentPersonnelView(ListAPIView):
+    queryset = Department.objects.all()
+    serializer_class = DepartmentPersonnelSerializer
