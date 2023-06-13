@@ -8,3 +8,9 @@ class DepartmentSerializer(serializers.ModelSerializer):
         model = Department
         fields = '__all__'
 
+
+class PersonnelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Personnel
+        fields = '__all__'
