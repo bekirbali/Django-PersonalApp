@@ -40,3 +40,12 @@ class PersonnelRUDView(RetrieveUpdateDestroyAPIView):
 class DepartmentPersonnelView(ListAPIView):
     queryset = Department.objects.all()
     serializer_class = DepartmentPersonnelSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned department to a given one,
+        by filtering against a `department` query parameter in the URL.
+        """
+        department = self.kwargs['department']
+        if department is not None:
+            return Department.objects.filter(name__iexact=department)
