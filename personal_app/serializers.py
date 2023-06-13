@@ -14,3 +14,12 @@ class PersonnelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Personnel
         fields = '__all__'
+
+
+class DepartmentPersonnelSerializer(serializers.ModelSerializer):
+
+    personnel = PersonnelSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Department
+        fields = '__all__'
