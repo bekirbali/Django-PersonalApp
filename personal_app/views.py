@@ -3,6 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
 
 from .permissions import IsAdminOrReadOnly
 
@@ -47,6 +49,14 @@ class PersonnelListCreateView(ListCreateAPIView):
 class PersonnelRUDView(RetrieveUpdateDestroyAPIView):
     queryset = Personnel.objects.all()
     serializer_class = PersonnelSerializer
+
+    def put(self,request, *args, **kwargs):
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return self.update(request, *args, **kwargs)
+        data = {
+            "message": "You are not allowed to update"
+        }
+        return Response(data, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class DepartmentPersonnelView(ListAPIView):
