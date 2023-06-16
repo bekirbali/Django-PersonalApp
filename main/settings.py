@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'personal_app',
     'users',
-    'cors'
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
